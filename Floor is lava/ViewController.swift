@@ -53,7 +53,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        
+        guard let _ = anchor as? ARPlaneAnchor else { return }
+        node.enumerateChildNodes { (chiledNode, _) in
+            chiledNode.removeFromParentNode()
+        }
     }
 }
 
